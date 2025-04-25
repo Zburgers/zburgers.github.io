@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Road Network Analysis - Nakshatra Kundlas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00f7ff;
+            --secondary-color: #ff00ff;
+            --accent-color: #ffc400;
+            --dark-bg: #0a0a14;
+            --darker-bg: #050508;
+            --text-color: #ffffff;
+            --glow-intensity: 0 0 15px;
+            --text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            --cyberpunk-grid: linear-gradient(rgba(0, 247, 255, 0.1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 247, 255, 0.1) 1px, transparent 1px);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+            text-shadow: var(--text-shadow);
+            background-image: var(--cyberpunk-grid);
+            background-size: 30px 30px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(10, 10, 20, 0.3) 0%, var(--darker-bg) 70%);
+            z-index: -1;
+        }
+
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background: rgba(10, 10, 20, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 247, 255, 0.1);
+        }
+
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-shadow: var(--glow-intensity) var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+            text-shadow: var(--glow-intensity) var(--primary-color);
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .project-header {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1542281286-9e0a16bb7366?q=80&w=2000') no-repeat center center/cover;
+            padding-top: 120px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .project-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(5, 5, 8, 0.8), rgba(10, 10, 20, 0.9));
+            z-index: 0;
+        }
+
+        .project-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M10,50 L20,20 L80,20 L90,50 L80,80 L20,80 L10,50" fill="none" stroke="rgba(0, 247, 255, 0.1)" stroke-width="1"/></svg>');
+            background-size: 100px 100px;
+            opacity: 0.2;
+            z-index: 0;
+            animation: backgroundMove 20s linear infinite;
+        }
+
+        @keyframes backgroundMove {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 100px 100px;
+            }
+        }
+
+        .project-title-container {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 3rem;
+            margin-top: 4rem;
+            background: rgba(10, 10, 20, 0.5);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 247, 255, 0.2);
+            box-shadow: 0 0 30px rgba(0, 247, 255, 0.15);
+            animation: floatContainer 6s ease-in-out infinite;
+        }
+
+        @keyframes floatContainer {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .project-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .project-tagline {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .project-link {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(45deg, rgba(0, 247, 255, 0.8), rgba(255, 0, 255, 0.8));
+            color: rgba(255, 255, 255, 0.95);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            text-shadow: var(--text-shadow);
+            box-shadow: 0 0 20px rgba(0, 247, 255, 0.3);
+            border: 1px solid var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-link::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .project-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 247, 255, 0.5);
+        }
+
+        .project-link:hover::before {
+            opacity: 1;
+            animation: link-shine 1.5s infinite;
+        }
+
+        @keyframes link-shine {
+            0% {
+                left: -50%;
+                top: -50%;
+            }
+            100% {
+                left: 150%;
+                top: 150%;
+            }
+        }
+
+        .project-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: var(--glow-intensity) var(--primary-color);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .project-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background: rgba(10, 10, 20, 0.7);
+            padding: 2rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 247, 255, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 247, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 30px rgba(0, 247, 255, 0.3);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            text-shadow: var(--glow-intensity) var(--primary-color);
+        }
+
+        .feature-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 4rem;
+        }
+
+        .tech-item {
+            background: rgba(10, 10, 20, 0.8);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: 0 0 10px rgba(0, 247, 255, 0.2);
+            border: 1px solid rgba(0, 247, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            background: rgba(0, 247, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 247, 255, 0.3);
+        }
+
+        .code-block {
+            background: rgba(5, 5, 8, 0.8);
+            padding: 2rem;
+            border-radius: 5px;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(0, 247, 255, 0.2);
+            overflow: auto;
+            position: relative;
+        }
+
+        .code-block pre {
+            font-family: 'Space Mono', monospace;
+            color: rgba(255, 255, 255, 0.9);
+            overflow-x: auto;
+        }
+
+        .code-block-title {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: rgba(0, 247, 255, 0.2);
+            padding: 0.3rem 1rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            border-bottom-left-radius: 5px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(10, 10, 20, 0.8);
+            border: 1px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 0 20px rgba(0, 247, 255, 0.3);
+            transition: all 0.3s ease;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+
+        .back-to-top i {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 247, 255, 0.5);
+        }
+
+        .space-stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: twinkle var(--duration) infinite ease-in-out;
+            animation-delay: var(--delay);
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        footer {
+            background: rgba(5, 5, 8, 0.9);
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(0, 247, 255, 0.2);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-link {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-color);
+            text-shadow: var(--glow-intensity) var(--primary-color);
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(10, 10, 20, 0.8);
+            border: 1px solid rgba(0, 247, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(0, 247, 255, 0.3);
+        }
+
+        .social-icon i {
+            font-size: 1.2rem;
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .project-image {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            border: 1px solid rgba(0, 247, 255, 0.2);
+            box-shadow: 0 0 30px rgba(0, 247, 255, 0.15);
+            margin-bottom: 2rem;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .image-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            border: 1px solid rgba(0, 247, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .image-card img {
+            width: 100%;
+            height: auto;
+            transition: all 0.3s ease;
+        }
+
+        .image-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 30px rgba(0, 247, 255, 0.3);
+        }
+
+        .image-card:hover img {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .project-header {
+                height: auto;
+                padding-top: 100px;
+            }
+            .project-title {
+                font-size: 2.5rem;
+            }
+            .project-tagline {
+                font-size: 1.2rem;
+            }
+            .project-title-container {
+                padding: 1.5rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="space-stars" id="spaceStars"></div>
+
+    <nav class="nav-bar">
+        <a href="index.html" class="nav-logo">NK.2077</a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="index.html#skills" class="nav-link">Skills</a>
+            <a href="index.html#projects" class="nav-link">Projects</a>
+            <a href="index.html#contact" class="nav-link">Contact</a>
+        </div>
+    </nav>
+
+    <div class="project-header">
+        <div class="project-title-container">
+            <h1 class="project-title">Road Network Analysis</h1>
+            <p class="project-tagline">Deep learning solution for detecting road networks from satellite imagery</p>
+            <div class="project-links">
+                <a href="https://github.com/Zburgers/road-network-analysis" target="_blank" class="project-link">
+                    <i class="fab fa-github"></i> View on GitHub
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="project-content">
+        <h2 class="section-title">About the Project</h2>
+        <div class="project-description">
+            <p>The <strong>Road Network Analysis</strong> project implements a deep learning solution for detecting road networks from satellite imagery using a UNet++ architecture with EfficientNet-B4 encoder. This cutting-edge approach enables accurate identification and mapping of road networks from aerial imagery, which has significant applications in urban planning, transportation analysis, and disaster response.</p>
+            <p>The model is trained on high-resolution satellite imagery to segment road networks, producing pixel-wise binary masks that indicate the presence of roads. This technology enables automated mapping and analysis of road infrastructure without manual intervention, greatly improving efficiency and accuracy in geospatial analysis tasks.</p>
+        </div>
+
+        <div class="image-grid">
+            <div class="image-card">
+                <img src="https://raw.githubusercontent.com/wiki/mapbox/robosat/images/comparison-parking.gif" alt="Road Network Detection Example" />
+            </div>
+        </div>
+
+        <h2 class="section-title">Key Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-network-wired"></i>
+                <h3>UNet++ Architecture</h3>
+                <p>Advanced segmentation architecture with EfficientNet-B4 encoder pre-trained on ImageNet for optimal feature extraction.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-code-branch"></i>
+                <h3>Dual Implementation</h3>
+                <p>Supports both Jupyter Notebook and modular Python code approaches for flexibility in development and deployment.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Advanced Metrics</h3>
+                <p>Comprehensive evaluation using Dice coefficient, BCE loss, precision, recall, and IoU to ensure model quality.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-eye"></i>
+                <h3>Visualization Tools</h3>
+                <p>Interactive tools for visualizing predictions and comparing them with ground truth maps for intuitive evaluation.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-cogs"></i>
+                <h3>Training Refinements</h3>
+                <p>Early stopping, learning rate scheduling, model checkpointing, and progress bars with real-time metrics.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-random"></i>
+                <h3>Data Augmentation</h3>
+                <p>Configurable pipeline for robust training with techniques like rotation, flipping, and color transformations.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Technologies Used</h2>
+        <div class="tech-stack">
+            <div class="tech-item">Python 3.8+</div>
+            <div class="tech-item">PyTorch</div>
+            <div class="tech-item">segmentation-models-pytorch</div>
+            <div class="tech-item">OpenCV</div>
+            <div class="tech-item">NumPy</div>
+            <div class="tech-item">Matplotlib</div>
+            <div class="tech-item">tqdm</div>
+            <div class="tech-item">PyYAML</div>
+            <div class="tech-item">Jupyter Notebook</div>
+        </div>
+
+        <h2 class="section-title">Model Architecture</h2>
+        <div class="project-description">
+            <p>The project uses a UNet++ architecture with an EfficientNet-B4 encoder for road network segmentation:</p>
+            <ul style="margin-left: 2rem; margin-bottom: 2rem; line-height: 1.6;">
+                <li><strong>Encoder:</strong> EfficientNet-B4 pre-trained on ImageNet for feature extraction</li>
+                <li><strong>Decoder:</strong> UNet++ with nested skip connections for improved information flow</li>
+                <li><strong>Output:</strong> Single-channel binary segmentation mask indicating road presence</li>
+            </ul>
+            <p>UNet++ improves upon the original U-Net architecture by introducing dense skip connections and deep supervision. This redesigned skip pathways aim to reduce the semantic gap between encoder and decoder features, enabling more precise segmentation of complex road structures.</p>
+        </div>
+
+        <h2 class="section-title">Code Snippets</h2>
+        <div class="code-block">
+            <div class="code-block-title">model.py</div>
+            <pre>
+import segmentation_models_pytorch as smp
+
+def build_model(config):
+    """
+    Build the UNet++ model with EfficientNet-B4 encoder
+    
+    Args:
+        config (dict): Configuration parameters
+        
+    Returns:
+        model: PyTorch model
+    """
+    # Create UNet++ model with EfficientNet-B4 encoder
+    model = smp.UnetPlusPlus(
+        encoder_name=config['model']['encoder_name'],      # 'efficientnet-b4'
+        encoder_weights=config['model']['encoder_weights'], # 'imagenet'
+        in_channels=3,                                     # RGB images
+        classes=config['model']['classes'],                # Binary segmentation
+        activation='sigmoid'                               # For binary segmentation
+    )
+    
+    return model
+
+def train_epoch(model, dataloader, optimizer, criterion, device):
+    """
+    Train model for one epoch
+    
+    Args:
+        model: PyTorch model
+        dataloader: PyTorch dataloader
+        optimizer: PyTorch optimizer
+        criterion: Loss function
+        device: Device to use for training
+        
+    Returns:
+        epoch_loss: Average loss for the epoch
+    """
+    model.train()
+    epoch_loss = 0
+    
+    for images, masks in tqdm(dataloader, desc="Training"):
+        images = images.to(device)
+        masks = masks.to(device)
+        
+        # Forward pass
+        outputs = model(images)
+        loss = criterion(outputs, masks)
+        
+        # Backward and optimize
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+        
+        epoch_loss += loss.item()
+    
+    return epoch_loss / len(dataloader)
+            </pre>
+        </div>
+
+        <h2 class="section-title">Getting Started</h2>
+        <div class="project-description">
+            <p>To get started with the Road Network Analysis project, follow these steps:</p>
+            
+            <ol style="margin-left: 2rem; margin-bottom: 2rem;">
+                <li>Clone the repository:
+                    <div class="code-block" style="margin: 1rem 0;">
+                        <pre>git clone https://github.com/Zburgers/road-network-analysis.git
+cd road-network-analysis</pre>
+                    </div>
+                </li>
+                <li>Create and activate a virtual environment:
+                    <div class="code-block" style="margin: 1rem 0;">
+                        <pre>python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# or
+venv\Scripts\activate  # Windows</pre>
+                    </div>
+                </li>
+                <li>Install dependencies:
+                    <div class="code-block" style="margin: 1rem 0;">
+                        <pre>pip install -r requirements.txt</pre>
+                    </div>
+                </li>
+                <li>Run the project:
+                    <div class="code-block" style="margin: 1rem 0;">
+                        <pre># For the notebook approach
+jupyter notebook main.ipynb
+
+# For the modular approach
+python main.py --mode train</pre>
+                    </div>
+                </li>
+            </ol>
+            
+            <p>The project provides two approaches to model training:</p>
+            <ul style="margin-left: 2rem; margin-bottom: 2rem; line-height: 1.6;">
+                <li><strong>Notebook Approach:</strong> Interactive and educational with step-by-step visualization, great for development and debugging</li>
+                <li><strong>Modular Approach:</strong> Production-ready implementation with better code organization, supporting distributed training and automated logging</li>
+            </ul>
+            
+            <p>Configuration parameters can be adjusted in the <code>config.yaml</code> file to experiment with different model architectures and training strategies.</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html" class="footer-link">Home</a>
+                <a href="index.html#skills" class="footer-link">Skills</a>
+                <a href="index.html#projects" class="footer-link">Projects</a>
+                <a href="index.html#contact" class="footer-link">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://github.com/zburgers" class="social-icon" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/nakshatra-kundlas-7a33a9170/" class="social-icon" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:nakshatra.kundlas@outlook.com" class="social-icon">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+            <p class="copyright">© 2077 Nakshatra Kundlas. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Create space stars background
+        const spaceStars = document.getElementById('spaceStars');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 3 + 1;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.setProperty('--duration', `${Math.random() * 5 + 2}s`);
+            star.style.setProperty('--delay', `${Math.random() * 5}s`);
+            spaceStars.appendChild(star);
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') === '#') return;
+                
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Nav bar scroll effect
+        window.addEventListener('scroll', () => {
+            const navBar = document.querySelector('.nav-bar');
+            if (window.scrollY > 100) {
+                navBar.style.padding = '1rem 2rem';
+                navBar.style.background = 'rgba(5, 5, 8, 0.95)';
+                navBar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
+            } else {
+                navBar.style.padding = '1.5rem 2rem';
+                navBar.style.background = 'rgba(10, 10, 20, 0.8)';
+                navBar.style.boxShadow = 'none';
+            }
+        });
+
+        // Show/hide back to top button
+        window.addEventListener('scroll', () => {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) {
+                backToTop.style.opacity = '1';
+                backToTop.style.pointerEvents = 'auto';
+            } else {
+                backToTop.style.opacity = '0';
+                backToTop.style.pointerEvents = 'none';
+            }
+        });
+
+        // Initialize with back-to-top hidden
+        document.querySelector('.back-to-top').style.opacity = '0';
+        document.querySelector('.back-to-top').style.pointerEvents = 'none';
+    </script>
+</body>
+</html> 
