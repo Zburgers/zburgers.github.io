@@ -3,7 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nakshatra Kundlas - AI & Blockchain Developer</title>
+    <title>Nakshatra Kundlas - AI & Blockchain Developer | Full Stack Engineer</title>
+    
+    <!-- Primary Meta Tags -->
+    <meta name="description" content="Nakshatra Kundlas - Expert AI & Blockchain Developer, Full Stack Engineer, and Tech Innovator. Specializing in machine learning, smart contracts, and cutting-edge web development.">
+    <meta name="keywords" content="AI Developer, Blockchain Developer, Full Stack Engineer, Machine Learning, Smart Contracts, Web Development, Tech Innovation, Nakshatra Kundlas">
+    <meta name="author" content="Nakshatra Kundlas">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Nakshatra Kundlas - AI & Blockchain Developer">
+    <meta property="og:description" content="Expert AI & Blockchain Developer, Full Stack Engineer, and Tech Innovator specializing in machine learning, smart contracts, and web development.">
+    <meta property="og:image" content="https://zburgers.github.io/assets/og-image.jpg">
+    <meta property="og:url" content="https://zburgers.github.io">
+    <meta property="og:site_name" content="Nakshatra Kundlas Portfolio">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Nakshatra Kundlas - AI & Blockchain Developer">
+    <meta name="twitter:description" content="Expert AI & Blockchain Developer, Full Stack Engineer, and Tech Innovator.">
+    <meta name="twitter:image" content="https://zburgers.github.io/assets/og-image.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://zburgers.github.io">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#00f7ff">
+    <meta name="msapplication-TileColor" content="#0a0a14">
+    
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Nakshatra Kundlas",
+        "jobTitle": "AI & Blockchain Developer",
+        "description": "Expert AI & Blockchain Developer, Full Stack Engineer, and Tech Innovator",
+        "url": "https://zburgers.github.io",
+        "sameAs": [
+            "https://www.linkedin.com/in/nakshatra-kundlas-7a33a9170/",
+            "https://github.com/zburgers"
+        ],
+        "email": "nakshatra.kundlas@outlook.com",
+        "knowsAbout": [
+            "Artificial Intelligence",
+            "Blockchain Development", 
+            "Machine Learning",
+            "Smart Contracts",
+            "Full Stack Development",
+            "Python",
+            "JavaScript",
+            "React",
+            "Node.js"
+        ],
+        "alumniOf": {
+            "@type": "Organization",
+            "name": "Educational Institution"
+        }
+    }
+    </script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -914,6 +983,58 @@
             }
         }
 
+        /* Accessibility - Screen reader only content */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Focus management for accessibility */
+        .skill-card:focus,
+        .project-card:focus,
+        .nav-link:focus,
+        .cta-button:focus,
+        .contact-item a:focus,
+        .close-modal:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+            box-shadow: 0 0 0 3px rgba(0, 247, 255, 0.3);
+        }
+
+        /* Skip to main content link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            padding: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 3px;
+            z-index: 1001;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 6px;
+        }
+
+        /* Ensure proper focus visibility for keyboard navigation */
+        button:focus-visible,
+        a:focus-visible,
+        [tabindex]:focus-visible {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
         /* Reduced motion preferences */
         @media (prefers-reduced-motion: reduce) {
             .floating-element,
@@ -1037,145 +1158,215 @@
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="space-stars" id="spaceStars"></div>
     <div class="floating-elements" id="floatingElements"></div>
     <div id="aircraftContainer"></div>
 
-    <nav class="nav-bar">
-        <a href="#" class="nav-logo">NK.2077</a>
-        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
+    <nav class="nav-bar" role="navigation" aria-label="Main navigation">
+        <a href="#" class="nav-logo" aria-label="Home - Nakshatra Kundlas Portfolio">NK.2077</a>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+            <i class="fas fa-bars" aria-hidden="true"></i>
         </button>
-        <div class="nav-links" id="navLinks">
-            <a href="#" class="nav-link">Home</a>
-            <a href="#skills" class="nav-link">Skills</a>
-            <a href="#" class="nav-link projects-button" id="projectsBtn">Projects</a>
-            <a href="#contact" class="nav-link">Contact</a>
+        <div class="nav-links" id="navLinks" role="menubar" aria-label="Navigation links">
+            <a href="#" class="nav-link" role="menuitem" aria-current="page">Home</a>
+            <a href="#skills" class="nav-link" role="menuitem">Skills</a>
+            <a href="#" class="nav-link projects-button" id="projectsBtn" role="menuitem" aria-haspopup="dialog">Projects</a>
+            <a href="#contact" class="nav-link" role="menuitem">Contact</a>
         </div>
     </nav>
 
-    <div class="hero">
+    <header class="hero" role="banner" aria-labelledby="hero-heading">
         <div class="hero-content">
-            <h1 data-text="Nakshatra Kundlas">Nakshatra Kundlas</h1>
-            <p>AI & Blockchain Developer | Full Stack Engineer | Tech Innovator</p>
-            <a href="#skills" class="cta-button">Explore My Skills</a>
+            <h1 id="hero-heading" data-text="Nakshatra Kundlas">Nakshatra Kundlas</h1>
+            <p role="doc-subtitle">AI & Blockchain Developer | Full Stack Engineer | Tech Innovator</p>
+            <a href="#skills" class="cta-button" role="button" aria-describedby="cta-description">
+                <span id="cta-description" class="sr-only">Navigate to skills section to explore my technical expertise</span>
+                Explore My Skills
+            </a>
         </div>
-    </div>
+    </header>
 
-    <section class="skills-section" id="skills">
-        <h2 class="section-title">Tech Arsenal</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <i class="fas fa-brain"></i>
-                <h3>Artificial Intelligence</h3>
-                <p>Expert in machine learning, deep learning, and AI model development</p>
+    <main role="main" id="main-content">
+        <section class="skills-section" id="skills" role="region" aria-labelledby="skills-heading">
+            <h2 id="skills-heading" class="section-title">Tech Arsenal</h2>
+            <div class="skills-grid" role="list">
+                <article class="skill-card" role="listitem" tabindex="0">
+                    <i class="fas fa-brain" aria-hidden="true"></i>
+                    <h3>Artificial Intelligence</h3>
+                    <p>Expert in machine learning, deep learning, and AI model development</p>
+                </article>
+                <article class="skill-card" role="listitem" tabindex="0">
+                    <i class="fas fa-link" aria-hidden="true"></i>
+                    <h3>Blockchain</h3>
+                    <p>Smart contract development and blockchain architecture</p>
+                </article>
+                <article class="skill-card" role="listitem" tabindex="0">
+                    <i class="fas fa-code" aria-hidden="true"></i>
+                    <h3>Full Stack Development</h3>
+                    <p>End-to-end web application development</p>
+                </article>
+                <article class="skill-card" role="listitem" tabindex="0">
+                    <i class="fas fa-project-diagram" aria-hidden="true"></i>
+                    <h3>Project Management</h3>
+                    <p>Leading complex technical projects to success</p>
+                </article>
             </div>
-            <div class="skill-card">
-                <i class="fas fa-link"></i>
-                <h3>Blockchain</h3>
-                <p>Smart contract development and blockchain architecture</p>
-            </div>
-            <div class="skill-card">
-                <i class="fas fa-code"></i>
-                <h3>Full Stack Development</h3>
-                <p>End-to-end web application development</p>
-            </div>
-            <div class="skill-card">
-                <i class="fas fa-project-diagram"></i>
-                <h3>Project Management</h3>
-                <p>Leading complex technical projects to success</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="projects-section" id="projects">
-        <h2 class="section-title">Featured Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-image">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <div class="project-content">
-                    <h3>AI-Powered Solutions</h3>
-                    <p>Advanced machine learning models and AI applications</p>
-                    <div class="tech-stack">
-                        <span>Python</span>
-                        <span>TensorFlow</span>
-                        <span>PyTorch</span>
+        <section class="projects-section" id="projects" role="region" aria-labelledby="projects-heading">
+            <h2 id="projects-heading" class="section-title">Featured Projects</h2>
+            <p class="section-subtitle" style="text-align: center; margin-bottom: 3rem; color: rgba(255, 255, 255, 0.8); font-size: 1.1rem;">Showcasing innovative solutions in AI, blockchain, and data analysis</p>
+            <div class="projects-grid" role="list">
+                <article class="project-card" role="listitem" tabindex="0">
+                    <div class="project-image" aria-hidden="true">
+                        <i class="fas fa-robot" aria-hidden="true"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>AI-Powered Solutions</h3>
+                        <p>Advanced machine learning models and AI applications</p>
+                        <div class="tech-stack" role="list" aria-label="Technologies used">
+                            <span role="listitem">Python</span>
+                            <span role="listitem">TensorFlow</span>
+                            <span role="listitem">PyTorch</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="project-card" role="listitem" tabindex="0">
+                    <div class="project-image" aria-hidden="true">
+                        <i class="fas fa-cubes" aria-hidden="true"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Blockchain Projects</h3>
+                        <p>Smart contracts and decentralized applications</p>
+                        <div class="tech-stack" role="list" aria-label="Technologies used">
+                            <span role="listitem">Solidity</span>
+                            <span role="listitem">Web3.js</span>
+                            <span role="listitem">Ethereum</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="project-card" role="listitem" tabindex="0">
+                    <div class="project-image" aria-hidden="true">
+                        <i class="fas fa-globe" aria-hidden="true"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Web Applications</h3>
+                        <p>Full-stack web development projects</p>
+                        <div class="tech-stack" role="list" aria-label="Technologies used">
+                            <span role="listitem">React</span>
+                            <span role="listitem">Node.js</span>
+                            <span role="listitem">MongoDB</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <button class="cta-button" id="viewAllProjectsBtn" aria-describedby="view-all-projects-description">
+                    <span id="view-all-projects-description" class="sr-only">Open modal to view complete project portfolio including Music Recommendation System, Road Network Analysis, and GitHub projects</span>
+                    View All Projects
+                </button>
+            </div>
+        </section>
+
+        <section class="contact-section" id="contact" role="region" aria-labelledby="contact-heading">
+            <h2 id="contact-heading" class="section-title">Neural Link</h2>
+            <div class="contact-content">
+                <div class="contact-info" role="list" aria-label="Contact information">
+                    <div class="contact-item" role="listitem">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <a href="mailto:nakshatra.kundlas@outlook.com" aria-label="Send email to nakshatra.kundlas@outlook.com">nakshatra.kundlas@outlook.com</a>
+                    </div>
+                    <div class="contact-item" role="listitem">
+                        <i class="fab fa-github" aria-hidden="true"></i>
+                        <a href="https://github.com/zburgers" target="_blank" rel="noopener noreferrer" aria-label="Visit GitHub profile (opens in new tab)">github.com/zburgers</a>
+                    </div>
+                    <div class="contact-item" role="listitem">
+                        <i class="fab fa-linkedin" aria-hidden="true"></i>
+                        <a href="https://www.linkedin.com/in/nakshatra-kundlas-7a33a9170/" target="_blank" rel="noopener noreferrer" aria-label="Visit LinkedIn profile (opens in new tab)">linkedin.com/in/nakshatra-kundlas</a>
                     </div>
                 </div>
             </div>
-            <div class="project-card">
-                <div class="project-image">
-                    <i class="fas fa-cubes"></i>
-                </div>
-                <div class="project-content">
-                    <h3>Blockchain Projects</h3>
-                    <p>Smart contracts and decentralized applications</p>
-                    <div class="tech-stack">
-                        <span>Solidity</span>
-                        <span>Web3.js</span>
-                        <span>Ethereum</span>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <div class="project-image">
-                    <i class="fas fa-globe"></i>
-                </div>
-                <div class="project-content">
-                    <h3>Web Applications</h3>
-                    <p>Full-stack web development projects</p>
-                    <div class="tech-stack">
-                        <span>React</span>
-                        <span>Node.js</span>
-                        <span>MongoDB</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <section class="contact-section" id="contact">
-        <h2 class="section-title">Neural Link</h2>
-        <div class="contact-content">
-            <div class="contact-info">
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <a href="mailto:nakshatra.kundlas@outlook.com">nakshatra.kundlas@outlook.com</a>
-                </div>
-                <div class="contact-item">
-                    <i class="fab fa-github"></i>
-                    <a href="https://github.com/zburgers" target="_blank">github.com/zburgers</a>
-                </div>
-                <div class="contact-item">
-                    <i class="fab fa-linkedin"></i>
-                    <a href="https://www.linkedin.com/in/nakshatra-kundlas-7a33a9170/" target="_blank">linkedin.com/in/nakshatra-kundlas</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="floating-linkedin">
-        <a href="https://www.linkedin.com/in/nakshatra-kundlas-7a33a9170/" target="_blank" class="linkedin-pane">
-            <i class="fab fa-linkedin"></i>
+    <aside class="floating-linkedin" aria-label="Quick LinkedIn access">
+        <a href="https://www.linkedin.com/in/nakshatra-kundlas-7a33a9170/" target="_blank" rel="noopener noreferrer" class="linkedin-pane" aria-label="Connect with me on LinkedIn (opens in new tab)">
+            <i class="fab fa-linkedin" aria-hidden="true"></i>
             <span>Connect on LinkedIn</span>
         </a>
-    </div>
+    </aside>
 
-    <div id="projectsModal">
-        <div class="close-modal" id="closeModal">
-            <i class="fas fa-times"></i>
+    <div id="projectsModal" role="dialog" aria-labelledby="projects-modal-title" aria-modal="true" aria-hidden="true">
+        <div class="close-modal" id="closeModal" role="button" aria-label="Close projects modal" tabindex="0">
+            <i class="fas fa-times" aria-hidden="true"></i>
         </div>
         <div class="projects-grid-modal">
-            <h2 class="section-title">Project Portfolio</h2>
-            <div class="projects-grid">
+            <h2 id="projects-modal-title" class="section-title">Project Portfolio</h2>
+            <div class="projects-grid" role="list">
                 <!-- Projects will be dynamically added here -->
             </div>
         </div>
     </div>
 
     <script>
+        // Service Worker Registration for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('Service Worker registered successfully:', registration.scope);
+                    })
+                    .catch((error) => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+
+        // Accessibility: Enhanced keyboard navigation
+        function handleKeyboardNavigation() {
+            document.addEventListener('keydown', (e) => {
+                // ESC key closes modal
+                if (e.key === 'Escape' && projectsModal.style.display === 'flex') {
+                    closeProjectsModal();
+                }
+                
+                // Enter/Space activates buttons
+                if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('close-modal')) {
+                    e.preventDefault();
+                    closeProjectsModal();
+                }
+                
+                // Tab trapping in modal
+                if (e.key === 'Tab' && projectsModal.style.display === 'flex') {
+                    trapTabKey(e);
+                }
+            });
+        }
+
+        function trapTabKey(e) {
+            const focusableElements = projectsModal.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            if (e.shiftKey) {
+                if (document.activeElement === firstElement) {
+                    lastElement.focus();
+                    e.preventDefault();
+                }
+            } else {
+                if (document.activeElement === lastElement) {
+                    firstElement.focus();
+                    e.preventDefault();
+                }
+            }
+        }
+
+        // Initialize accessibility features
+        handleKeyboardNavigation();
+
         // Create space stars background
         const spaceStars = document.getElementById('spaceStars');
         for (let i = 0; i < 200; i++) {
@@ -1273,19 +1464,52 @@
             lastScrollY = currentScrollY;
         });
 
-        // Projects modal functionality
+        // Projects modal functionality with accessibility improvements
         const projectsBtn = document.getElementById('projectsBtn');
+        const viewAllProjectsBtn = document.getElementById('viewAllProjectsBtn');
         const projectsModal = document.getElementById('projectsModal');
         const closeModal = document.getElementById('closeModal');
+        
+        let previouslyFocusedElement = null;
 
-        projectsBtn.addEventListener('click', () => {
+        function openProjectsModal() {
+            previouslyFocusedElement = document.activeElement;
             projectsModal.style.display = 'flex';
+            projectsModal.setAttribute('aria-hidden', 'false');
+            if (projectsBtn) projectsBtn.setAttribute('aria-expanded', 'true');
             document.body.style.overflow = 'hidden';
-        });
+            
+            // Focus the close button
+            setTimeout(() => {
+                closeModal.focus();
+            }, 100);
+        }
 
-        closeModal.addEventListener('click', () => {
+        function closeProjectsModal() {
             projectsModal.style.display = 'none';
+            projectsModal.setAttribute('aria-hidden', 'true');
+            if (projectsBtn) projectsBtn.setAttribute('aria-expanded', 'false');
             document.body.style.overflow = 'auto';
+            
+            // Return focus to the button that opened the modal
+            if (previouslyFocusedElement) {
+                previouslyFocusedElement.focus();
+            }
+        }
+
+        if (projectsBtn) {
+            projectsBtn.addEventListener('click', openProjectsModal);
+        }
+        if (viewAllProjectsBtn) {
+            viewAllProjectsBtn.addEventListener('click', openProjectsModal);
+        }
+        closeModal.addEventListener('click', closeProjectsModal);
+
+        // Close modal when clicking outside
+        projectsModal.addEventListener('click', (e) => {
+            if (e.target === projectsModal) {
+                closeProjectsModal();
+            }
         });
 
         // Smooth scrolling for anchor links
@@ -1322,22 +1546,34 @@
             }
         });
 
-        // Mobile navigation functionality
+        // Mobile navigation functionality with accessibility improvements
         const mobileNavToggle = document.getElementById('mobileNavToggle');
         const navLinks = document.getElementById('navLinks');
         const navLinksItems = document.querySelectorAll('.nav-link');
 
-        mobileNavToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+        function toggleMobileNav() {
             const isOpen = navLinks.classList.contains('active');
+            
+            navLinks.classList.toggle('active');
+            mobileNavToggle.setAttribute('aria-expanded', !isOpen);
             
             // Toggle hamburger icon
             const icon = mobileNavToggle.querySelector('i');
-            icon.className = isOpen ? 'fas fa-times' : 'fas fa-bars';
+            icon.className = !isOpen ? 'fas fa-times' : 'fas fa-bars';
             
             // Prevent body scroll when menu is open
-            document.body.style.overflow = isOpen ? 'hidden' : 'auto';
-        });
+            document.body.style.overflow = !isOpen ? 'hidden' : 'auto';
+            
+            // Focus management
+            if (!isOpen) {
+                // Opening menu - focus first nav link
+                setTimeout(() => {
+                    navLinksItems[0]?.focus();
+                }, 100);
+            }
+        }
+
+        mobileNavToggle.addEventListener('click', toggleMobileNav);
 
         // Close mobile menu when clicking on nav links
         navLinksItems.forEach(link => {
@@ -1363,14 +1599,21 @@
             }
         });
 
-        // Initialize the projects data dynamically
+        // Initialize the projects data dynamically with actual local project links
         const projectsData = [
             {
                 name: "Music Recommendation System",
                 description: "A machine learning system that provides personalized music recommendations based on user preferences.",
                 tech: ["Python", "Machine Learning", "Data Analysis"],
                 icon: "fa-music",
-                url: "https://zburgers.github.io/music-recommendation-system"
+                url: "/music-recommendation-system.html"
+            },
+            {
+                name: "Road Network Analysis",
+                description: "Spatial data analysis tool for road network optimization and traffic flow analysis.",
+                tech: ["GIS", "Data Visualization", "Python"],
+                icon: "fa-road",
+                url: "/road-network-analysis.html"
             },
             {
                 name: "Sentiment Analysis DISTILLBERT",
@@ -1399,33 +1642,38 @@
                 tech: ["Automation", "Business Tools", "Python"],
                 icon: "fa-file-invoice-dollar",
                 url: "https://github.com/Zburgers/AutoQuoter"
-            },
-            {
-                name: "Road Network Analysis",
-                description: "Spatial data analysis tool for road network optimization.",
-                tech: ["GIS", "Data Visualization", "Python"],
-                icon: "fa-road",
-                url: "https://github.com/Zburgers/road-network-analysis"
             }
         ];
 
-        // Populate modal with projects
+        // Populate modal with projects (with accessibility improvements)
         const projectsGridModal = document.querySelector('.projects-grid-modal .projects-grid');
         
-        projectsData.forEach(project => {
-            const card = document.createElement('div');
+        projectsData.forEach((project, index) => {
+            const card = document.createElement('article');
             card.className = 'project-card';
+            card.setAttribute('role', 'listitem');
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('aria-labelledby', `project-title-${index}`);
+            
+            // Determine if it's an internal or external link
+            const isExternal = project.url.startsWith('https://github.com');
+            const linkAttributes = isExternal ? 
+                'target="_blank" rel="noopener noreferrer"' : '';
+            const linkLabel = isExternal ? 
+                `View ${project.name} on GitHub (opens in new tab)` : 
+                `View ${project.name} project details`;
+            
             card.innerHTML = `
-                <div class="project-image">
-                    <i class="fas ${project.icon}"></i>
+                <div class="project-image" aria-hidden="true">
+                    <i class="fas ${project.icon}" aria-hidden="true"></i>
                 </div>
                 <div class="project-content">
-                    <h3>${project.name}</h3>
+                    <h3 id="project-title-${index}">${project.name}</h3>
                     <p>${project.description}</p>
-                    <div class="tech-stack">
-                        ${project.tech.map(tech => `<span>${tech}</span>`).join('')}
+                    <div class="tech-stack" role="list" aria-label="Technologies used">
+                        ${project.tech.map(tech => `<span role="listitem">${tech}</span>`).join('')}
                     </div>
-                    <a href="${project.url}" target="_blank" class="cta-button" style="margin-top: 1rem; padding: 0.5rem 1rem; font-size: 0.9rem;">View Project</a>
+                    <a href="${project.url}" ${linkAttributes} class="cta-button" style="margin-top: 1rem; padding: 0.5rem 1rem; font-size: 0.9rem;" aria-label="${linkLabel}">${isExternal ? 'View on GitHub' : 'View Project'}</a>
                 </div>
             `;
             projectsGridModal.appendChild(card);

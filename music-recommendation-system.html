@@ -110,6 +110,45 @@
             transform-origin: left;
         }
 
+        /* Breadcrumb Navigation */
+        .breadcrumb {
+            background: rgba(10, 10, 20, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 247, 255, 0.1);
+            padding: 1rem 2rem;
+            margin-top: 70px;
+        }
+
+        .breadcrumb-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb-item {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb-item:hover {
+            color: var(--primary-color);
+            text-shadow: var(--glow-intensity) var(--primary-color);
+        }
+
+        .breadcrumb-separator {
+            color: rgba(255, 255, 255, 0.4);
+            margin: 0 0.25rem;
+        }
+
+        .breadcrumb-current {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
         .project-header {
             height: 60vh;
             display: flex;
@@ -529,6 +568,17 @@
             <a href="index.html#contact" class="nav-link">Contact</a>
         </div>
     </nav>
+
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb" role="navigation" aria-label="Breadcrumb">
+        <nav class="breadcrumb-nav">
+            <a href="index.html" class="breadcrumb-item" aria-label="Go to homepage">Home</a>
+            <span class="breadcrumb-separator" aria-hidden="true">›</span>
+            <a href="index.html#projects" class="breadcrumb-item" aria-label="Go to projects section">Projects</a>
+            <span class="breadcrumb-separator" aria-hidden="true">›</span>
+            <span class="breadcrumb-current" aria-current="page">Music Recommendation System</span>
+        </nav>
+    </div>
 
     <div class="project-header">
         <div class="project-title-container">
