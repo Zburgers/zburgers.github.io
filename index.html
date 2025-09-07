@@ -1216,6 +1216,7 @@
 
         <section class="projects-section" id="projects" role="region" aria-labelledby="projects-heading">
             <h2 id="projects-heading" class="section-title">Featured Projects</h2>
+            <p class="section-subtitle" style="text-align: center; margin-bottom: 3rem; color: rgba(255, 255, 255, 0.8); font-size: 1.1rem;">Showcasing innovative solutions in AI, blockchain, and data analysis</p>
             <div class="projects-grid" role="list">
                 <article class="project-card" role="listitem" tabindex="0">
                     <div class="project-image" aria-hidden="true">
@@ -1259,6 +1260,12 @@
                         </div>
                     </div>
                 </article>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <button class="cta-button" id="viewAllProjectsBtn" aria-describedby="view-all-projects-description">
+                    <span id="view-all-projects-description" class="sr-only">Open modal to view complete project portfolio including Music Recommendation System, Road Network Analysis, and GitHub projects</span>
+                    View All Projects
+                </button>
             </div>
         </section>
 
@@ -1459,6 +1466,7 @@
 
         // Projects modal functionality with accessibility improvements
         const projectsBtn = document.getElementById('projectsBtn');
+        const viewAllProjectsBtn = document.getElementById('viewAllProjectsBtn');
         const projectsModal = document.getElementById('projectsModal');
         const closeModal = document.getElementById('closeModal');
         
@@ -1468,7 +1476,7 @@
             previouslyFocusedElement = document.activeElement;
             projectsModal.style.display = 'flex';
             projectsModal.setAttribute('aria-hidden', 'false');
-            projectsBtn.setAttribute('aria-expanded', 'true');
+            if (projectsBtn) projectsBtn.setAttribute('aria-expanded', 'true');
             document.body.style.overflow = 'hidden';
             
             // Focus the close button
@@ -1480,7 +1488,7 @@
         function closeProjectsModal() {
             projectsModal.style.display = 'none';
             projectsModal.setAttribute('aria-hidden', 'true');
-            projectsBtn.setAttribute('aria-expanded', 'false');
+            if (projectsBtn) projectsBtn.setAttribute('aria-expanded', 'false');
             document.body.style.overflow = 'auto';
             
             // Return focus to the button that opened the modal
@@ -1489,7 +1497,12 @@
             }
         }
 
-        projectsBtn.addEventListener('click', openProjectsModal);
+        if (projectsBtn) {
+            projectsBtn.addEventListener('click', openProjectsModal);
+        }
+        if (viewAllProjectsBtn) {
+            viewAllProjectsBtn.addEventListener('click', openProjectsModal);
+        }
         closeModal.addEventListener('click', closeProjectsModal);
 
         // Close modal when clicking outside
@@ -1586,14 +1599,21 @@
             }
         });
 
-        // Initialize the projects data dynamically
+        // Initialize the projects data dynamically with actual local project links
         const projectsData = [
             {
                 name: "Music Recommendation System",
                 description: "A machine learning system that provides personalized music recommendations based on user preferences.",
                 tech: ["Python", "Machine Learning", "Data Analysis"],
                 icon: "fa-music",
-                url: "https://zburgers.github.io/music-recommendation-system"
+                url: "/music-recommendation-system.html"
+            },
+            {
+                name: "Road Network Analysis",
+                description: "Spatial data analysis tool for road network optimization and traffic flow analysis.",
+                tech: ["GIS", "Data Visualization", "Python"],
+                icon: "fa-road",
+                url: "/road-network-analysis.html"
             },
             {
                 name: "Sentiment Analysis DISTILLBERT",
@@ -1622,13 +1642,6 @@
                 tech: ["Automation", "Business Tools", "Python"],
                 icon: "fa-file-invoice-dollar",
                 url: "https://github.com/Zburgers/AutoQuoter"
-            },
-            {
-                name: "Road Network Analysis",
-                description: "Spatial data analysis tool for road network optimization.",
-                tech: ["GIS", "Data Visualization", "Python"],
-                icon: "fa-road",
-                url: "https://github.com/Zburgers/road-network-analysis"
             }
         ];
 
@@ -1641,6 +1654,15 @@
             card.setAttribute('role', 'listitem');
             card.setAttribute('tabindex', '0');
             card.setAttribute('aria-labelledby', `project-title-${index}`);
+            
+            // Determine if it's an internal or external link
+            const isExternal = project.url.startsWith('https://github.com');
+            const linkAttributes = isExternal ? 
+                'target="_blank" rel="noopener noreferrer"' : '';
+            const linkLabel = isExternal ? 
+                `View ${project.name} on GitHub (opens in new tab)` : 
+                `View ${project.name} project details`;
+            
             card.innerHTML = `
                 <div class="project-image" aria-hidden="true">
                     <i class="fas ${project.icon}" aria-hidden="true"></i>
@@ -1651,7 +1673,7 @@
                     <div class="tech-stack" role="list" aria-label="Technologies used">
                         ${project.tech.map(tech => `<span role="listitem">${tech}</span>`).join('')}
                     </div>
-                    <a href="${project.url}" target="_blank" rel="noopener noreferrer" class="cta-button" style="margin-top: 1rem; padding: 0.5rem 1rem; font-size: 0.9rem;" aria-label="View ${project.name} project (opens in new tab)">View Project</a>
+                    <a href="${project.url}" ${linkAttributes} class="cta-button" style="margin-top: 1rem; padding: 0.5rem 1rem; font-size: 0.9rem;" aria-label="${linkLabel}">${isExternal ? 'View on GitHub' : 'View Project'}</a>
                 </div>
             `;
             projectsGridModal.appendChild(card);
